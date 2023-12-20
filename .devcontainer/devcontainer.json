@@ -1,10 +1,9 @@
 {
-    "name": "Machi-Koro-Cpp-devcontainer",
+    "name": "machi-koro-cpp-devcontainer",
     "build": {
         "dockerfile": "./Dockerfile",
         "context": "."
     },
-    "capAdd": ["SYS_PTRACE"],
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": "false",
@@ -14,22 +13,12 @@
             "userUid": "1000",
             "userGid": "1000",
             "upgradePackages": "true"
-        },
-        "ghcr.io/devcontainers/features/git:1": {
-            "version": "latest",
-            "ppa": "false"
         }
     },
     "customizations": {
         "vscode": {
-            "settings": {
-				"terminal.integrated.defaultProfile.linux": "bash",
-				"files.eol": "\n"
-			},
-            "extensions": [
-                "ms-vscode.cpptools",
-				"ms-vscode.cmake-tools"
-            ]
+            "settings": {},
+            "extensions": []
         }
     },
     "remoteUser": "vscode"
