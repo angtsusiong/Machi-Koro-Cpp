@@ -1,0 +1,41 @@
+name: Build and Push devcontainer Images
+
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * MON'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [linux/amd64, linux/arm64]
+    env:
+      ARCH: ${{ matrix.arch }}
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Set date_tag
+      id: var_date
+      run: echo "date_tag=$(date +"%Y%m%d")" >> $GITHUB_OUTPUT
+    
+    - name: Set arch_tag
+      id: var_arch
+      run: echo "arch_tag=${ARCH:6}" >> $GITHUB_OUTPUT
+
+    - name: Login to github container registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build image with devcontainer.json
+      uses: devcontainers/ci@v0.3
+      with:
+        imageName: ghcr.io/${{ GITHUB_REPOSITORY }}-devcontainer
+        imageTag: ${{ steps.var_date.outputs.date_tag }}-${{ steps.var_arch.outputs.arch_tag}}, latest-${{ arch_tag }}
+        platform: ${{ matrix.arch }}
