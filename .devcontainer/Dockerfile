@@ -65,7 +65,6 @@ RUN set -xe && \
     update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-15 100 && \
     update-alternatives --install /usr/bin/lld lld /usr/bin/lld-15 100 && \
     update-alternatives --install /usr/bin/clang clang /usr/bin/clang-15 100 && \
-    update-alternatives --install /usr/bin/clang-tools clang-tools /usr/bin/clang-tools-15 100 && \
     update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 100 && \
     update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 100 && \
     update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100 && \
