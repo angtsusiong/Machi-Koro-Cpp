@@ -30,7 +30,15 @@ RUN set -xe && \
         g++-12 \
         pkg-config \
         openssl \
-        llvm-toolchain-15 \
+        llvm-15 \
+        lld-15 \
+        lldb-15 \
+        clang-15 \
+        clang-format-15 \
+        clang-tidy-15 \
+        clangd-15 \
+        clang-tools-15 \
+        llvm-15-tools \
         libssl-dev \
         libjsoncpp-dev \
         uuid-dev \
