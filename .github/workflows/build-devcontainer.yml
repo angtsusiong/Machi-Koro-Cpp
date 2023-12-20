@@ -36,6 +36,6 @@ jobs:
     - name: Build image with devcontainer.json
       uses: devcontainers/ci@v0.3
       with:
-        imageName: ghcr.io/$GITHUB_REPOSITORY-devcontainer
+        imageName: ghcr.io/angtsusiong/Machi-Koro-Cpp-devcontainer
         imageTag: ${{ steps.var_date.outputs.date_tag }}-${{ steps.var_arch.outputs.arch_tag}}, latest-${{ steps.var_arch.outputs.arch_tag }}
         platform: ${{ matrix.arch }}
