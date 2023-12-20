@@ -89,6 +89,7 @@ RUN set -xe && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf "$HOME/drogon" && \
     rm -rf "$HOME/release" && \
-    timedatectl set-timezone Asia/Taipei
+    unlink /etc/localtime && \
+    ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
     
 ARG USERNAME=vscode
