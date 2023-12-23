@@ -11,6 +11,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <random>
+#include <chrono>
 
 // TODO: maybe move this to other place, so that other files can use the same address
 static const std::string HTTP_ADDRESS = "http://127.0.0.1:8086";
@@ -60,12 +62,21 @@ drogon::HttpRequestPtr GetRequestObj(const std::string json_key_name,
 TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
 {
     // Given
+    auto genRanStr = [](size_t length) {
+        const std::string chars {"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
+        std::mt19937 mt_rand(std::chrono::system_clock::now().time_since_epoch().count());
+        std::uniform_int_distribution<> dist(0, chars.size() - 1);
+        std::string random_string;
+        for (size_t i = 0; i < length; ++i)
+            random_string += chars[dist(mt_rand)];
+        return random_string;
+    };
     Json::Value create_game_request_json;
     Json::Value player_list(Json::arrayValue);
-    player_list.append("player0");
-    player_list.append("player1");
-    player_list.append("player2");
-    player_list.append("player3");
+    player_list.append(genRanStr(8));
+    player_list.append(genRanStr(8));
+    player_list.append(genRanStr(8));
+    player_list.append(genRanStr(8));
     create_game_request_json[controllers::utils::player_names] = player_list;
 
     // When

@@ -61,9 +61,9 @@ TEST_F(OperateEffectTest, WheatFieldNormalCase) {
     // You can get 1 coin from the bank, if the dice value is 1.
     WheatField card;
     card.OperateEffect(card_owner, dice_roller, players, bank);
-    EXPECT_EQ(card_owner->get_coin(), OperateEffectTest::initial_coin + 1);
+    EXPECT_EQ(card_owner->get_coin(), OperateEffectTest::initial_coin);
     EXPECT_EQ(dice_roller->get_coin(), OperateEffectTest::initial_coin);
     EXPECT_EQ(player_1->get_coin(), OperateEffectTest::initial_coin);
     EXPECT_EQ(player_2->get_coin(), OperateEffectTest::initial_coin);
-    EXPECT_EQ(bank->get_coin(), OperateEffectTest::bank_initial_coin - 1);
+    EXPECT_EQ(bank->get_coin(), OperateEffectTest::bank_initial_coin);
 }

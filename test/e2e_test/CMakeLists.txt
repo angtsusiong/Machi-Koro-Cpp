@@ -37,4 +37,4 @@ target_sources(${PROJECT_NAME}
                ${CARDS_SRC_TEST}
                ${EVENTS_SRC_TEST})
 
-add_test(game_setup_e2etest test/e2e_test/machikoro_game_test.cpp)
+add_test(game_setup_e2etest ${PROJECT_NAME})
