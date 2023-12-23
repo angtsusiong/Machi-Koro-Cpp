@@ -1,11 +1,8 @@
-ARG VARIANT=ubuntu-22.04
+ARG VARIANT="jammy"
 FROM mcr.microsoft.com/devcontainers/base:${VARIANT}
-USER root
 
 ENV LANGUAGE="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
-    TERM="xterm" \
-    HOME="/root" \
     CC=gcc-12 \
     CXX=g++-12 \
     AR=gcc-ar-12 \
@@ -18,6 +15,8 @@ RUN set -xe && \
         apt-utils \
         build-essential \
         locales && \
+    apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y \
         curl \
         wget \
@@ -69,8 +68,8 @@ RUN set -xe && \
     update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 100 && \
     update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100 && \
     echo "**** download sourcecode ****" && \
-    git clone --recursive "https://github.com/drogonframework/drogon" "$HOME/drogon" && \
-    cd "$HOME/drogon" && \
+    git clone --recursive "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
+    cd "/tmp/drogon" && \
     mkdir build && \
     cd build && \
     cmake \
@@ -79,16 +78,16 @@ RUN set -xe && \
         .. && \
     echo "**** build sourcecode ****" && \
     make && \
-    mkdir "$HOME/release" && \
-    make DESTDIR="$HOME/release/" install && \
+    mkdir "/tmp/release" && \
+    make DESTDIR="/tmp/release/" install && \
     echo "**** install drogon ****" && \
-    cp -r "$HOME/release/usr" / && \
-    cd "$HOME" && \
+    cp -r "/tmp/release/usr" / && \
+    cd "/" && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -rf "$HOME/drogon" && \
-    rm -rf "$HOME/release" && \
+    rm -rf "/tmp/drogon" && \
+    rm -rf "/tmp/release" && \
     unlink /etc/localtime && \
     ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
     
