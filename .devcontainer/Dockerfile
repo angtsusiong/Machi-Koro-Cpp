@@ -51,6 +51,7 @@ RUN set -xe && \
         libbrotli-dev \
         libgtest-dev \
         libgmock-dev \
+        doxygen \
         valgrind \
         vim \
         neovim \
