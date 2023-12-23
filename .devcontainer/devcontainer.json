@@ -3,6 +3,8 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
+	"capAdd": ["SYS_PTRACE"],
+	"securityOpt": ["seccomp=unconfined"],
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": "false",
@@ -16,8 +18,10 @@
     },
     "customizations": {
         "vscode": {
-            "settings": {},
-            "extensions": []
+            "extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cmake-tools"
+			]
         }
     },
     "remoteUser": "vscode"
