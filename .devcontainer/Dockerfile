@@ -11,13 +11,12 @@ ENV LANGUAGE="en_US.UTF-8" \
 RUN set -xe && \
     echo "**** install dependency ****" && \
     apt-get update && \
+    apt-get upgrade -y && \
+    apt-get update && \
     apt-get install -y \
         apt-utils \
         build-essential \
-        locales && \
-    apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y \
+        locales \
         curl \
         wget \
         gnupg \
