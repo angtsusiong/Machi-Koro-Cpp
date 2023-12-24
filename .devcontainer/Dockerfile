@@ -15,10 +15,9 @@ RUN set -xe && \
     apt-get upgrade -y && \
     apt-get update && \
     apt-get install -y \
-        apt-utils \
-        build-essential \
         locales \
         curl \
+        sudo \
         wget \
         gnupg \
         cmake \
@@ -51,7 +50,6 @@ RUN set -xe && \
         libbrotli-dev \
         libgtest-dev \
         libgmock-dev \
-        doxygen \
         valgrind \
         vim \
         neovim \
@@ -84,11 +82,10 @@ RUN set -xe && \
     echo "**** install drogon ****" && \
     cp -r "/tmp/release/usr" / && \
     cd "/" && \
-    apt-get autoremove -y && \
-    apt-get clean -y && \
     rm -rf "/tmp/drogon" && \
     rm -rf "/tmp/release" && \
     unlink /etc/localtime && \
-    ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
-    
+    ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && \
+    echo "Asia/Taipei" > /etc/timezone
+
 ARG USERNAME=vscode
