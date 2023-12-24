@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/devcontainers/base:${VARIANT}
 
 ENV LANGUAGE="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
+    TERM="xterm" \
     CC=gcc-12 \
     CXX=g++-12 \
     AR=gcc-ar-12 \
@@ -85,7 +86,6 @@ RUN set -xe && \
     cd "/" && \
     apt-get autoremove -y && \
     apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/* && \
     rm -rf "/tmp/drogon" && \
     rm -rf "/tmp/release" && \
     unlink /etc/localtime && \
