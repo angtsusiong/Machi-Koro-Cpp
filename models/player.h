@@ -47,7 +47,7 @@ private:
     int coin_ = 0;
     DiceImpl dice_;
     std::string name_;
-    std::unique_ptr<Hand> hand_ = nullptr;
+    std::unique_ptr<Hand> hand_;
 };
 
 #endif

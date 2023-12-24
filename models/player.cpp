@@ -17,7 +17,6 @@ Player::Player(const std::string& name)
 
 Player::~Player()
 {
-    hand_ = nullptr;
 }
 
 std::pair<int, int> Player::RollDice(int dice_count)

@@ -23,7 +23,7 @@ public:
     
     void SaveGame(std::shared_ptr<MachiKoroGame> game) override;
 
-    MachiKoroGame* FindGameByID(const std::string& id) override;
+    std::shared_ptr<MachiKoroGame> FindGameByID(const std::string& id) override;
 
     void ClearAllGames() override;
 

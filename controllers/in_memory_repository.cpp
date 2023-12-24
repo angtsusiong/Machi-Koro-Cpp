@@ -8,7 +8,6 @@
 
 InMemoryRepository::~InMemoryRepository()
 {
-    games_.clear();
 }
 
 InMemoryRepository& InMemoryRepository::self()
@@ -23,7 +22,7 @@ void InMemoryRepository::AddGame(std::shared_ptr<MachiKoroGame> game)
     while (this->IsGameExist(id)) 
         id = this->RandomID();
     game->set_game_id(id);
-    games_[id] = game;
+    games_.insert({id, std::move(game)});
 }
 
 void InMemoryRepository::SaveGame(std::shared_ptr<MachiKoroGame> game)
@@ -31,22 +30,27 @@ void InMemoryRepository::SaveGame(std::shared_ptr<MachiKoroGame> game)
     return;
 }
 
-MachiKoroGame* InMemoryRepository::FindGameByID(const std::string& id)
+std::shared_ptr<MachiKoroGame> InMemoryRepository::FindGameByID(const std::string& id)
 {
     if (!this->IsGameExist(id)) return nullptr;
-    return games_[id].get();
+    return games_[id];
 }
 
 void InMemoryRepository::ClearAllGames()
 {
-    for (auto& game : games_)
-        game.second.reset();
     games_.clear();
 }
 
 bool InMemoryRepository::IsGameExist(const std::string& id)
 {
-    return (games_.find(id) != games_.end());
+    if (auto gamePtr = games_.find(id); gamePtr != games_.end()) {
+        if (gamePtr->second == nullptr) {
+            games_.erase(id);
+            return false;
+        }
+        return true;
+    }
+    return false;
 }
 
 std::string InMemoryRepository::RandomID()

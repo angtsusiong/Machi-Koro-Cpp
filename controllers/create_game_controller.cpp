@@ -9,16 +9,16 @@
 
 // Add definition of your processing function here
 // TODO: deal with same gameName
-void CreateGame::createGame(const HttpRequestPtr &req,
-               std::function<void (const HttpResponsePtr &)> &&callback) {
+void CreateGame::createGame(const drogon::HttpRequestPtr &req,
+               std::function<void (const drogon::HttpResponsePtr &)> &&callback) {
     LOG_INFO << "Receive createGame request.";
 
     auto json = req->getJsonObject();
     if (!json)
     {
-        auto resp = HttpResponse::newHttpResponse();
+        auto resp = drogon::HttpResponse::newHttpResponse();
         resp->setBody("missing 'value' in body");
-        resp->setStatusCode(k400BadRequest);
+        resp->setStatusCode(drogon::HttpStatusCode::k400BadRequest);
         callback(resp);
         return;
     }
@@ -32,7 +32,7 @@ void CreateGame::createGame(const HttpRequestPtr &req,
     uc.CreateGameExecute(
         CreateGameUsecaseRequest(player_names), InMemoryRepository::self(), presenter);
     
-    auto resp = HttpResponse::newHttpJsonResponse(presenter.GetViewModel());
+    auto resp = drogon::HttpResponse::newHttpJsonResponse(presenter.GetViewModel());
     callback(resp);
 }
 

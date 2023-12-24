@@ -3,6 +3,7 @@ project(MachiKoroCPP CXX)
 
 include(CheckIncludeFileCXX)
 
+set(CMAKE_REQUIRED_FLAGS "-std=c++20")
 check_include_file_cxx(any HAS_ANY)
 check_include_file_cxx(string_view HAS_STRING_VIEW)
 check_include_file_cxx(coroutine HAS_COROUTINE)
