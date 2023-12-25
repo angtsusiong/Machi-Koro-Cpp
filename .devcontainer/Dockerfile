@@ -75,9 +75,11 @@ RUN set -xe && \
     cmake \
         -DCMAKE_BUILD_TYPE=RELEASE \
         -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_CXX_FLAGS="-std=c++20" \
+        -G Ninja \
         .. && \
     echo "**** build sourcecode ****" && \
-    make && \
+    ninja && \
     mkdir "/tmp/release" && \
     make DESTDIR="/tmp/release/" install && \
     echo "**** install drogon ****" && \
