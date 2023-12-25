@@ -4,6 +4,7 @@
 #include <drogon/HttpTypes.h>
 
 #include "../../models/machikoro_game.h"
+#include <chrono>
 
 int main(int argc, char** argv)
 {
@@ -21,6 +22,8 @@ int main(int argc, char** argv)
 
     // The future is only satisfied after the event loop started
     f1.get();
+    
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
     testing::InitGoogleTest(&argc, argv);
     int status = RUN_ALL_TESTS();
