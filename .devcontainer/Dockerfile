@@ -75,7 +75,7 @@ RUN set -xe && \
     cmake \
         -DCMAKE_BUILD_TYPE=RELEASE \
         -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_CXX_FLAGS="-std=c++20" \
+        -DCMAKE_CXX_FLAGS="-std=c++20 -Wno-error" \
         -G Ninja \
         .. && \
     echo "**** build sourcecode ****" && \
