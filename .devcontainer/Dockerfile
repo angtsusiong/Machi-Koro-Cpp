@@ -78,7 +78,7 @@ RUN set -xe && \
         -G Ninja \
         .. && \
     echo "**** build sourcecode ****" && \
-    ninja && \
+    make && \
     mkdir "/tmp/release" && \
     make DESTDIR="/tmp/release/" install && \
     echo "**** install drogon ****" && \
