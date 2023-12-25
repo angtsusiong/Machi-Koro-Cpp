@@ -23,6 +23,7 @@ RUN set -xe && \
         cmake \
         cppcheck \
         make \
+        ninja-build \
         git \
         gcc-12 \
         g++-12 \
