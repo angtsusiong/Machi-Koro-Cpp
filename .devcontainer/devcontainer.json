@@ -23,11 +23,23 @@
     "customizations": {
         "vscode": {
             "extensions": [
-				"ms-vscode.cpptools",
-				"ms-vscode.cmake-tools"
-			]
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools-extension-pack",
+                "llvm-vs-code-extensions.vscode-clangd",
+                "streetsidesoftware.code-spell-checker",
+                "github.vscode-github-actions",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "VisualStudioExptTeam.intellicode-api-usage-examples",
+                "ms-vsliveshare.vsliveshare",
+                "redhat.vscode-yaml"
+            ]
         }
     },
     "postCreateCommand": "npm install -g @devcontainers/cli",
+    "runArgs": ["--userns=keep-id"],
+    "containerEnv": {
+        "HOME": "/home/vscode"
+    },
     "remoteUser": "vscode"
 }

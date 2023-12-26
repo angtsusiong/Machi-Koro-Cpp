@@ -68,23 +68,27 @@ RUN set -xe && \
     update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 100 && \
     update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100 && \
     echo "**** download sourcecode ****" && \
-    git clone --recursive "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
+    git clone "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
     cd "/tmp/drogon" && \
-    mkdir build && \
-    cd build && \
-    cmake \
-        -DCMAKE_BUILD_TYPE=RELEASE \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        .. && \
-    echo "**** build sourcecode ****" && \
-    make && \
-    mkdir "/tmp/release" && \
-    make DESTDIR="/tmp/release/" install && \
-    echo "**** install drogon ****" && \
-    cp -r "/tmp/release/usr" / && \
-    cd "/" && \
-    rm -rf "/tmp/drogon" && \
-    rm -rf "/tmp/release" && \
+    ./build.sh && \
+    cd "/" && rm -rf "/tmp/drogon" && \
+    # git clone --recursive "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
+    # cd "/tmp/drogon" && \
+    # mkdir build && \
+    # cd build && \
+    # cmake \
+    #     -DCMAKE_BUILD_TYPE=RELEASE \
+    #     -DCMAKE_INSTALL_PREFIX=/usr \
+    #     .. && \
+    # echo "**** build sourcecode ****" && \
+    # make && \
+    # mkdir "/tmp/release" && \
+    # make DESTDIR="/tmp/release/" install && \
+    # echo "**** install drogon ****" && \
+    # cp -r "/tmp/release/usr" / && \
+    # cd "/" && \
+    # rm -rf "/tmp/drogon" && \
+    # rm -rf "/tmp/release" && \
     unlink /etc/localtime && \
     ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && \
     echo "Asia/Taipei" > /etc/timezone
