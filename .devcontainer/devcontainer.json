@@ -37,7 +37,6 @@
         }
     },
     "postCreateCommand": "npm install -g @devcontainers/cli",
-    "runArgs": ["--userns=keep-id"],
     "containerEnv": {
         "HOME": "/home/vscode"
     },
