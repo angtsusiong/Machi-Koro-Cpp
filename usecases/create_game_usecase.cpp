@@ -16,7 +16,7 @@ void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input,
 {
     auto game = std::make_shared<MachiKoroGame>(input.get_player_names());
     repo.AddGame(game);
-    presenter.Present(*game); // similar to repository
+    presenter.Present(game); // similar to repository
     // auto game = GameRepository::self().CreateGame(input.get_player_names());
     // presenter.Present(*game);
 }

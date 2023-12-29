@@ -4,5 +4,5 @@
 
 class Presenter {
 public:
-    virtual void Present(const MachiKoroGame& game) = 0;
+    virtual void Present(std::shared_ptr<MachiKoroGame> game) = 0;
 };

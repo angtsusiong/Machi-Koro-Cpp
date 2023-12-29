@@ -20,7 +20,7 @@ public:
 
 class RollDicePresenter : public Presenter {
 public:
-    void Present(const MachiKoroGame& game) override;
+    void Present(std::shared_ptr<MachiKoroGame> game) override;
     Json::Value GetViewModel() const;
 
 private:

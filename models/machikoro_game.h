@@ -1,6 +1,7 @@
 #ifndef MACHIKORO_GAME_H
 #define MACHIKORO_GAME_H
 
+#include <drogon/utils/Utilities.h>
 #include <string>
 #include <vector>
 #include <memory>
@@ -12,7 +13,7 @@
 
 class MachiKoroGame {
 public:
-    MachiKoroGame() = default;
+    MachiKoroGame() : game_id_(drogon::utils::getUuid()) {}
     MachiKoroGame(const std::vector<std::string>& player_names);
     MachiKoroGame(const MachiKoroGame& game) = delete;
     MachiKoroGame(MachiKoroGame&& game) = delete;
@@ -26,7 +27,6 @@ public:
     std::unique_ptr<DomainEvent> 
     RollDice(const std::string& player_id, int dice_count);
 
-    void set_game_id(const std::string& id) { game_id_ = id; }
     std::string get_game_id() const { return game_id_; }
 
     const Bank* get_bank() const { return bank_.get(); }
@@ -37,10 +37,10 @@ public:
     std::vector<Player*> get_players();
 
 private:
-    std::string game_id_;
-    std::unique_ptr<Bank> bank_ = nullptr;
+    const std::string game_id_;
+    std::unique_ptr<Bank> bank_ = std::make_unique<Bank>();
     std::vector<std::unique_ptr<Player>> players_;
-    std::unique_ptr<ArchitectureMarket> market_ = nullptr;
+    std::unique_ptr<ArchitectureMarket> market_ = std::make_unique<ArchitectureMarket>();
 };
 
 #endif

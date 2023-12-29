@@ -30,8 +30,6 @@ public:
 private:
     InMemoryRepository() = default;
 
-    std::string RandomID();
-
     bool IsGameExist(const std::string& id);
 
 private:

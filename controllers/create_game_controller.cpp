@@ -36,9 +36,9 @@ void CreateGame::createGame(const drogon::HttpRequestPtr &req,
     callback(resp);
 }
 
-void CreateGamePresenter::Present(const MachiKoroGame& game)
+void CreateGamePresenter::Present(std::shared_ptr<MachiKoroGame> game)
 {
-    game_id_ = game.get_game_id();
+    game_id_ = game->get_game_id();
 }
 
 Json::Value CreateGamePresenter::GetViewModel() const

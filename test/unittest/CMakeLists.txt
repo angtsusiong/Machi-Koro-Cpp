@@ -11,5 +11,5 @@ add_executable(${TEST_BINARY}
     ${card_src}
 )
 
-target_link_libraries(${TEST_BINARY} gtest gtest_main pthread)
+target_link_libraries(${TEST_BINARY} Drogon::Drogon gtest gtest_main pthread)
 add_test(game_unittest ${TEST_BINARY})

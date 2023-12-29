@@ -34,7 +34,7 @@ void RollDice::rollDice(const HttpRequestPtr &req,
     callback(resp);
 }
 
-void RollDicePresenter::Present(const MachiKoroGame& game)
+void RollDicePresenter::Present(std::shared_ptr<MachiKoroGame> game)
 {
     //game_id_ = game.get_game_id();
 }

@@ -30,7 +30,7 @@ Bank& Bank::operator = (Bank&& rhs)
     return *this;
 }
 
-void Bank::PayCoin2Player(int coin, Player* player)
+void Bank::PayCoin2Player(int coin, const std::unique_ptr<Player>& player)
 {
     coin_ -= coin;
     player->GainCoin(coin);

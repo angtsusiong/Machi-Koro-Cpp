@@ -5,6 +5,7 @@
 #include <climits>
 #include <algorithm>
 #include <iostream>
+#include <drogon/utils/Utilities.h>
 
 InMemoryRepository::~InMemoryRepository()
 {
@@ -18,11 +19,7 @@ InMemoryRepository& InMemoryRepository::self()
 
 void InMemoryRepository::AddGame(std::shared_ptr<MachiKoroGame> game)
 {
-    std::string id = this->RandomID();
-    while (this->IsGameExist(id)) 
-        id = this->RandomID();
-    game->set_game_id(id);
-    games_.insert({id, std::move(game)});
+    games_.insert({game->get_game_id(), std::move(game)});
 }
 
 void InMemoryRepository::SaveGame(std::shared_ptr<MachiKoroGame> game)
@@ -51,12 +48,4 @@ bool InMemoryRepository::IsGameExist(const std::string& id)
         return true;
     }
     return false;
-}
-
-std::string InMemoryRepository::RandomID()
-{
-    std::uniform_int_distribution<int> u(0, INT_MAX);
-    std::default_random_engine e(time(0));
-    std::string id = std::to_string(u(e));
-    return id;
 }

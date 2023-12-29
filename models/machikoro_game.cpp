@@ -3,19 +3,18 @@
 #include <iostream>
 #include <algorithm>
 
+#include <drogon/utils/Utilities.h>
 #include "events/roll_dice_event.h"
 
-MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
+MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names) : 
+    game_id_(drogon::utils::getUuid())
 {
     for (const auto& name : player_names)
-    {
-        auto player = std::make_unique<Player>(name);
-        players_.push_back(std::move(player));
-    }
+        players_.emplace_back(std::make_unique<Player>(name));
 
     bank_ = std::make_unique<Bank>();
-    for (auto& player : players_)
-        bank_->PayCoin2Player(3, player.get());
+    for (const auto& player : players_)
+        bank_->PayCoin2Player(3, player);
 
     market_ = std::make_unique<ArchitectureMarket>();
 
@@ -66,7 +65,7 @@ MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
             return it != hand->get_landmarks().end();
         };
     
-    // Idnetify current player.
+    // Identify current player.
     auto player = (*std::find_if(players_.begin(), players_.end(),
         [&player_id](const auto& p) { return p->get_name() == player_id; }
     )).get();
