@@ -1,5 +1,7 @@
-ARG VARIANT="jammy"
-FROM mcr.microsoft.com/devcontainers/base:${VARIANT}
+# ARG VARIANT="jammy"
+# FROM mcr.microsoft.com/devcontainers/base:${VARIANT}
+ARG VARIANT="dev-debian"
+FROM mcr.microsoft.com/devcontainers/cpp:${VARIANT}
 
 ENV LANGUAGE="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
@@ -19,26 +21,33 @@ RUN set -xe && \
 
 RUN echo "==== Installing dependency ====" && \
     apt-get update && \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y \
-        cmake \
-        cppcheck \
-        valgrind \
-        make \
-        ninja-build \
-        gcc-12 \
-        g++-12 \
-        pkg-config \
-        openssl \
-        llvm-15 \
-        lld-15 \
-        lldb-15 \
-        clang-15 \
-        clang-format-15 \
-        clang-tidy-15 \
-        clangd-15 \
-        clang-tools-15 \
-        llvm-15-tools \
+        # cmake \
+        # cppcheck \
+        # valgrind \
+        # make \
+        # ninja-build \
+        # gcc-12 \
+        # g++-12 \
+        # pkg-config \
+        # openssl \
+        # llvm-15 \
+        # lld-15 \
+        # lldb-15 \
+        # clang-15 \
+        # clang-format-15 \
+        # clang-tidy-15 \
+        # clangd-15 \
+        # clang-tools-15 \
+        # llvm-15-tools \
         libssl-dev \
+        lld \
+        clang-format \
+        clang-tidy \
+        clangd \
+        clang-tools \
+        llvm-dev \
         libjsoncpp-dev \
         uuid-dev \
         zlib1g-dev \
@@ -50,22 +59,22 @@ RUN echo "==== Installing dependency ====" && \
         libyaml-cpp-dev \
         libbrotli-dev \
         libgtest-dev \
-        libgmock-dev \
-        googletest-tools && \
+        libgmock-dev && \
+        # googletest-tools && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
-RUN echo "==== Setting gcc clang version ====" && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100 && \
-    update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-15 100 && \
-    update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-15 100 && \
-    update-alternatives --install /usr/bin/lld lld /usr/bin/lld-15 100 && \
-    update-alternatives --install /usr/bin/clang clang /usr/bin/clang-15 100 && \
-    update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 100 && \
-    update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 100 && \
-    update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100
+# RUN echo "==== Setting gcc clang version ====" && \
+#     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 && \
+#     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100 && \
+#     update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-15 100 && \
+#     update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-15 100 && \
+#     update-alternatives --install /usr/bin/lld lld /usr/bin/lld-15 100 && \
+#     update-alternatives --install /usr/bin/clang clang /usr/bin/clang-15 100 && \
+#     update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 100 && \
+#     update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 100 && \
+#     update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100
 
 RUN echo "==== Installing drogon from source ====" && \
     git clone "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
