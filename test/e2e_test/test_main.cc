@@ -1,35 +1,24 @@
-#define DROGON_TEST_MAIN
 #include <gtest/gtest.h>
 #include <drogon/drogon.h>
-#include <drogon/HttpTypes.h>
 
-#include "../../models/machikoro_game.h"
 #include <chrono>
 
 int main(int argc, char** argv)
 {
-    using namespace drogon;
-
     std::promise<void> p1;
-    std::future<void> f1 = p1.get_future();
+    auto f1 = p1.get_future();
 
-    // Start the main loop on another thread
-    std::thread thr([&]() {
-        // Queues the promise to be fulfilled after starting the loop
-        app().getLoop()->queueInLoop([&p1]() { p1.set_value(); });
-        app().addListener("127.0.0.1", 8086).run();
+    std::jthread thr([&p1] {
+        drogon::app().getLoop()->queueInLoop([&p1] { p1.set_value(); });
+        drogon::app().addListener("127.0.0.1", 8086).run();
     });
 
-    // The future is only satisfied after the event loop started
     f1.get();
-    
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
     testing::InitGoogleTest(&argc, argv);
     int status = RUN_ALL_TESTS();
 
-    // Ask the event loop to shutdown and wait
-    app().getLoop()->queueInLoop([]() { app().quit(); });
-    thr.join();
+    drogon::app().getLoop()->queueInLoop([] { drogon::app().quit(); });
     return status;
 }
