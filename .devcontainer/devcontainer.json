@@ -23,16 +23,10 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode.cpptools",
-                "ms-vscode.cmake-tools",
                 "ms-vscode.cpptools-extension-pack",
-                "llvm-vs-code-extensions.vscode-clangd",
-                "streetsidesoftware.code-spell-checker",
-                "github.vscode-github-actions",
-                "VisualStudioExptTeam.vscodeintellicode",
-                "VisualStudioExptTeam.intellicode-api-usage-examples",
+                "ms-vscode-remote.remote-containers",
                 "ms-vsliveshare.vsliveshare",
-                "redhat.vscode-yaml"
+                "VisualStudioExptTeam.vscodeintellicode"
             ]
         }
     },
