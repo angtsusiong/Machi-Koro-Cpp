@@ -27,7 +27,13 @@
                 "ms-vsliveshare.vsliveshare",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "ms-vscode.cmake-tools",
-                "streetsidesoftware.code-spell-checker"
+                "streetsidesoftware.code-spell-checker",
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.makefile-tools",
+                "yzhang.markdown-all-in-one",
+                "ms-python.python",
+                "pflannery.vscode-versionlens",
+                "timonwong.shellcheck"
             ]
         }
     },

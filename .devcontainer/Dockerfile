@@ -5,11 +5,11 @@ FROM mcr.microsoft.com/devcontainers/cpp:${VARIANT}
 
 ENV LANGUAGE="en_US.UTF-8" \
     LANG="en_US.UTF-8" \
-    TERM="xterm-256color" \
-    CC="gcc-12" \
-    CXX="g++-12" \
-    AR="gcc-ar-12" \
-    RANLIB="gcc-ranlib-12"
+    TERM="xterm-256color"
+    # CC="gcc-12" \
+    # CXX="g++-12" \
+    # AR="gcc-ar-12" \
+    # RANLIB="gcc-ranlib-12"
 
 RUN set -xe && \
     echo "==== Generating locale ====" && \
@@ -47,6 +47,7 @@ RUN echo "==== Installing dependency ====" && \
         clang-tidy \
         clangd \
         clang-tools \
+        doxygen \
         llvm-dev \
         libjsoncpp-dev \
         uuid-dev \
@@ -61,7 +62,8 @@ RUN echo "==== Installing dependency ====" && \
         libgtest-dev \
         libgmock-dev && \
         # googletest-tools && \
-    apt-get autoremove -y && \
+    apt-get autoremove -y \
+        zsh yarn && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
@@ -80,6 +82,10 @@ RUN echo "==== Installing drogon from source ====" && \
     git clone "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
     cd "/tmp/drogon" && \
     ./build.sh && \
+    rm -rf "/usr/local/vcpkg" "/usr/local/vcpkg-downloads" && \ 
+    rm -rf "/home/vscode/.vcpkg" && \ 
+    rm -rf "/home/vscode/.oh-my-zsh" && \ 
+    rm -rf "/home/vscode/.zshrc" "/home/vscode/.zprofile" && \ 
     rm -rf "/tmp/drogon"
 
 ARG USERNAME=vscode
