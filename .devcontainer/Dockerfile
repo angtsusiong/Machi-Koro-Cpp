@@ -15,8 +15,9 @@ RUN set -xe && \
     echo "==== Setting timezone ====" && \
     unlink /etc/localtime && \
     ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && \
-    echo "Asia/Taipei" > /etc/timezone && \
-    echo "==== Installing dependency ====" && \
+    echo "Asia/Taipei" > /etc/timezone
+
+RUN echo "==== Installing dependency ====" && \
     apt-get update && \
     apt-get install -y \
         cmake \
@@ -53,8 +54,9 @@ RUN set -xe && \
         googletest-tools && \
     apt-get autoremove -y && \
     apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/* && \
-    echo "==== Setting gcc clang version ====" && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN echo "==== Setting gcc clang version ====" && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100 && \
     update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-15 100 && \
@@ -63,8 +65,9 @@ RUN set -xe && \
     update-alternatives --install /usr/bin/clang clang /usr/bin/clang-15 100 && \
     update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 100 && \
     update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 100 && \
-    update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100 && \
-    echo "==== Installing drogon from source ====" && \
+    update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100
+
+RUN echo "==== Installing drogon from source ====" && \
     git clone "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
     cd "/tmp/drogon" && \
     ./build.sh && \
