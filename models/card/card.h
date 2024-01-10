@@ -1,5 +1,4 @@
-#ifndef CARD_H
-#define CARD_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -63,5 +62,3 @@ private:
     CardName name_;
     CardType card_type_;
 };
-
-#endif

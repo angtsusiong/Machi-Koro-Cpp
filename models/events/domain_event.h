@@ -1,9 +1,6 @@
-#ifndef DOMAIN_EVENT_H
-#define DOMAIN_EVENT_H
+#pragma once
 
 class DomainEvent {
 public:
     virtual ~DomainEvent() = default;
 };
-
-#endif

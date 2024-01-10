@@ -1,5 +1,4 @@
-#ifndef DICE_H
-#define DICE_H
+#pragma once
 
 class Dice {
 public:
@@ -8,5 +7,3 @@ public:
 
     virtual int GeneratePoint() const = 0;
 };
-
-#endif

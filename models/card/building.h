@@ -1,5 +1,4 @@
-#ifndef BUILDING_H
-#define BUILDING_H
+#pragma once
 
 #include <vector>
 
@@ -31,5 +30,3 @@ private:
     std::vector<int> points_;
     IndustryType industry_type_;
 };
-
-#endif

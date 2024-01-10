@@ -1,5 +1,4 @@
-#ifndef DICE_IMPL_H
-#define DICE_IMPL_H
+#pragma once
 
 #include "dice.h"
 
@@ -10,5 +9,3 @@ public:
 
     int GeneratePoint() const final;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TRAINSTATION_H
-#define TRAINSTATION_H
+#pragma once
 
 #include "landmark.h"
 
@@ -14,5 +13,3 @@ public:
         Bank* bank) override;
 
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef BANK_H
-#define BANK_H
+#pragma once
 
 #include "player.h"
 
@@ -22,5 +21,3 @@ public:
 private:
     int coin_ = 282;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ARCHITECTURE_MARKET_H
-#define ARCHITECTURE_MARKET_H
+#pragma once
 
 #include <map>
 #include <string>
@@ -29,5 +28,3 @@ private:
     // key: Card name; Value : Cards.
     std::map<CardName, std::vector<std::unique_ptr<Card>>> buildings_;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TVSTATION_H
-#define TVSTATION_H
+#pragma once
 
 #include "building.h"
 
@@ -13,5 +12,3 @@ public:
         std::vector<Player*> players,
         Bank* bank) override;
 };
-
-#endif

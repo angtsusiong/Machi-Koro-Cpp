@@ -1,5 +1,4 @@
-#ifndef HAND_H
-#define HAND_H
+#pragma once
 
 #include <vector>
 #include <memory>
@@ -27,5 +26,3 @@ private:
     std::vector<std::unique_ptr<Card>> buildings_;
     std::vector<std::unique_ptr<Card>> landmarks_;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef SHOPPINGMALL_H
-#define SHOPPINGMALL_H
+#pragma once
 
 #include "landmark.h"
 
@@ -14,5 +13,3 @@ public:
         Bank* bank) override;
 
 };
-
-#endif

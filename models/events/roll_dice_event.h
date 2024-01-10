@@ -1,5 +1,4 @@
-#ifndef ROLL_DICE_EVENT_H
-#define ROLL_DICE_EVENT_H
+#pragma once
 
 #include "domain_event.h"
 
@@ -30,5 +29,3 @@ private:
     bool can_reroll_ = false;
     bool can_roll_next_ = false;
 };
-
-#endif

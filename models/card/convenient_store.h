@@ -1,5 +1,4 @@
-#ifndef CONVENIENSTORE_H
-#define CONVENIENSTORE_H
+#pragma once
 
 #include "building.h"
 
@@ -14,5 +13,3 @@ public:
         Bank* bank) override;
 
 };
-
-#endif

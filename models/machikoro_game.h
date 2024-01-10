@@ -1,5 +1,4 @@
-#ifndef MACHIKORO_GAME_H
-#define MACHIKORO_GAME_H
+#pragma once
 
 #include <drogon/utils/Utilities.h>
 #include <string>
@@ -42,5 +41,3 @@ private:
     std::vector<std::unique_ptr<Player>> players_;
     std::unique_ptr<ArchitectureMarket> market_ = std::make_unique<ArchitectureMarket>();
 };
-
-#endif

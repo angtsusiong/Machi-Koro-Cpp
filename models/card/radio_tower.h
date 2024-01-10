@@ -1,5 +1,4 @@
-#ifndef RADIOTOWER_H
-#define RADIOTOWER_H
+#pragma once
 
 #include "landmark.h"
 
@@ -14,5 +13,3 @@ public:
         Bank* bank) override;
 
 };
-
-#endif

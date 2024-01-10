@@ -1,5 +1,4 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -49,5 +48,3 @@ private:
     std::string name_;
     std::unique_ptr<Hand> hand_;
 };
-
-#endif

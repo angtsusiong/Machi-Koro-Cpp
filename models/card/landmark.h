@@ -1,5 +1,4 @@
-#ifndef LANDMARK_H
-#define LANDMARK_H
+#pragma once
 
 #include "card.h"
 
@@ -21,5 +20,3 @@ private:
     // False: 背面, True: 正面。
     bool is_activated_ = false;
 };
-
-#endif
