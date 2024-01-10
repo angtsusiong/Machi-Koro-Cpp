@@ -25,6 +25,7 @@ RUN echo "==== Installing dependency ====" && \
         clang-tools \
         doxygen \
         llvm-dev \
+        libc++-dev \
         libjsoncpp-dev \
         uuid-dev \
         zlib1g-dev \
@@ -37,8 +38,7 @@ RUN echo "==== Installing dependency ====" && \
         libbrotli-dev \
         libgtest-dev \
         libgmock-dev && \
-    apt-get autoremove -y \
-        zsh yarn && \
+    apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
@@ -46,10 +46,6 @@ RUN echo "==== Installing drogon from source ====" && \
     git clone "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
     cd "/tmp/drogon" && \
     ./build.sh && \
-    rm -rf "/usr/local/vcpkg" "/usr/local/vcpkg-downloads" && \ 
-    rm -rf "/home/vscode/.vcpkg" && \ 
-    rm -rf "/home/vscode/.oh-my-zsh" && \ 
-    rm -rf "/home/vscode/.zshrc" "/home/vscode/.zprofile" && \ 
     rm -rf "/tmp/drogon"
 
 ARG USERNAME=vscode
