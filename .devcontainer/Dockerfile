@@ -1,4 +1,4 @@
-ARG VARIANT="dev-debian"
+ARG VARIANT="debian-12"
 FROM mcr.microsoft.com/devcontainers/cpp:${VARIANT}
 
 ENV LANG="en_US.UTF-8" \
