@@ -1,15 +1,9 @@
-include(CTest)
-set(TEST_BINARY ${PROJECT_NAME}_game_unittest)
+project(${PROJECT_NAME}Unittest CXX)
 
-file(GLOB model_src ../../models/*.cpp)
-file(GLOB card_src ../../models/card/*.cpp)
-
-add_executable(${TEST_BINARY}
+add_executable(${PROJECT_NAME}
     game_unittest.cpp
-    operate_effect_unittest.cpp
-    ${model_src}
-    ${card_src}
-)
+    operate_effect_unittest.cpp)
 
-target_link_libraries(${TEST_BINARY} Drogon::Drogon gtest gtest_main pthread)
-add_test(game_unittest ${TEST_BINARY})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${OBJLIB} GTest::gtest GTest::gtest_main)
+
+gtest_add_tests(TARGET ${PROJECT_NAME})
