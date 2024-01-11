@@ -10,10 +10,10 @@ MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names) :
     game_id_(drogon::utils::getUuid())
 {
     for (const auto& name : player_names)
-        players_.emplace_back(std::make_unique<Player>(name));
+        players_.emplace_back(std::make_shared<Player>(name));
 
     bank_ = std::make_unique<Bank>();
-    for (const auto& player : players_)
+    for (auto& player : players_)
         bank_->PayCoin2Player(3, player);
 
     market_ = std::make_unique<ArchitectureMarket>();
@@ -32,7 +32,7 @@ MachiKoroGame::~MachiKoroGame()
     bank_ = nullptr;
     market_ = nullptr;
     for (auto& p : players_)
-        p = nullptr;
+        p.reset();
     players_.clear();
 }
 
@@ -41,34 +41,34 @@ void MachiKoroGame::GameStart()
     std::cout << "Game Start !!" << std::endl;
 }
 
-std::vector<Player*> MachiKoroGame::get_players()
+std::vector<std::shared_ptr<Player>> MachiKoroGame::get_players() const
 {
-    std::vector<Player*> players;
-    for (const auto& player: players_)
-        players.push_back(player.get());
-    return players;
+    // std::vector<Player*> players;
+    // for (const auto& player: players_)
+    //     players.push_back(player.get());
+    return players_;
 }
 
 std::unique_ptr<DomainEvent> 
 MachiKoroGame::RollDice(const std::string& player_id, int dice_count) 
 {
     auto IsLandmarkInHand = 
-        [](const Hand* hand, const CardName name) -> bool {
+        [](std::shared_ptr<Hand> hand, const CardName name) -> bool {
             auto it = std::find_if(
                 hand->get_landmarks().begin(),
                 hand->get_landmarks().end(),
-                [&name](Card* landmark)  { 
+                [&name](std::shared_ptr<Card> landmark)  { 
                     return landmark->get_name() == name &&
-                        dynamic_cast<Landmark*>(landmark)->IsActivate();
+                        std::dynamic_pointer_cast<Landmark>(landmark)->IsActivate();
                 }
             );
             return it != hand->get_landmarks().end();
         };
     
     // Identify current player.
-    auto player = (*std::find_if(players_.begin(), players_.end(),
+    auto player = *std::find_if(players_.begin(), players_.end(),
         [&player_id](const auto& p) { return p->get_name() == player_id; }
-    )).get();
+    );
 
     auto [pt1, pt2] = player->RollDice(dice_count);
     auto event = std::make_unique<RollDiceEvent>(pt1, pt2,

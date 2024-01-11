@@ -40,11 +40,11 @@ public:
     void set_name(const std::string& name) { name_ = name; }
     std::string get_name() const { return name_; }
 
-    const Hand* get_hand() const { return hand_.get(); }
+    std::shared_ptr<Hand> get_hand() const { return hand_; }
 
 private:
     int coin_ = 0;
     DiceImpl dice_;
     std::string name_;
-    std::unique_ptr<Hand> hand_;
+    std::shared_ptr<Hand> hand_;
 };

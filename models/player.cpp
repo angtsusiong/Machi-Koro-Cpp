@@ -5,13 +5,13 @@
 #include "card/landmark.h"
 
 Player::Player()
-    : hand_(std::make_unique<Hand>())
+    : hand_(std::make_shared<Hand>())
 {
 }
 
 Player::Player(const std::string& name)
     : name_(name)
-    , hand_(std::make_unique<Hand>())
+    , hand_(std::make_shared<Hand>())
 {
 }
 
@@ -24,9 +24,9 @@ std::pair<int, int> Player::RollDice(int dice_count)
     auto it = std::find_if(
         hand_->get_landmarks().begin(), 
         hand_->get_landmarks().end(),
-        [](Card* landmark) {
+        [](std::shared_ptr<Card> landmark) {
             return landmark->get_name() == CardName::TRAIN_STATION &&
-                dynamic_cast<Landmark*>(landmark)->IsActivate();
+                std::dynamic_pointer_cast<Landmark>(landmark)->IsActivate();
         }
     );
 

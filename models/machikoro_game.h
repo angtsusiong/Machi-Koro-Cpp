@@ -33,11 +33,11 @@ public:
     const ArchitectureMarket* get_market() const { return market_.get(); }
 
     // TODO(smart pointer): implement this function.
-    std::vector<Player*> get_players();
+    std::vector<std::shared_ptr<Player>> get_players() const;
 
 private:
     const std::string game_id_;
     std::unique_ptr<Bank> bank_ = std::make_unique<Bank>();
-    std::vector<std::unique_ptr<Player>> players_;
+    std::vector<std::shared_ptr<Player>> players_;
     std::unique_ptr<ArchitectureMarket> market_ = std::make_unique<ArchitectureMarket>();
 };

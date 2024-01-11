@@ -12,18 +12,18 @@ Hand::~Hand()
     landmarks_.clear();
 }
 
-std::vector<Card*> Hand::get_buildings() const
+std::vector<std::shared_ptr<Card>> Hand::get_buildings() const
 {
-    std::vector<Card*> res;
-    for (const auto& card : buildings_)
-        res.push_back(card.get());
-    return res;
+    // std::vector<Card*> res;
+    // for (const auto& card : buildings_)
+    //     res.push_back(card.get());
+    return buildings_;
 }
 
-std::vector<Card*> Hand::get_landmarks() const
+std::vector<std::shared_ptr<Card>> Hand::get_landmarks() const
 {
-    std::vector<Card*> res;
-    for (const auto& card: landmarks_)
-        res.push_back(card.get());
-    return res;
+    // std::vector<Card*> res;
+    // for (const auto& card: landmarks_)
+    //     res.push_back(card.get());
+    return landmarks_;
 }

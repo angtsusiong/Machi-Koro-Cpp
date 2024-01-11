@@ -18,11 +18,12 @@ public:
     void AddLandmark(std::unique_ptr<Card> card) 
     { landmarks_.push_back(std::move(card)); }
 
-    std::vector<Card*> get_buildings() const;
+    std::vector<std::shared_ptr<Card>> get_buildings() const;
 
-    std::vector<Card*> get_landmarks() const;
+    std::vector<std::shared_ptr<Card>> get_landmarks() const;
 
 private:
-    std::vector<std::unique_ptr<Card>> buildings_;
-    std::vector<std::unique_ptr<Card>> landmarks_;
+    friend class Player;
+    std::vector<std::shared_ptr<Card>> buildings_;
+    std::vector<std::shared_ptr<Card>> landmarks_;
 };
