@@ -1,7 +1,7 @@
 {
     "name": "machi-koro-cpp-devcontainer-podman",
     "build": {
-        "dockerfile": "../Dockerfile"
+        "dockerfile": "Dockerfile"
     },
     "capAdd": ["SYS_PTRACE"],
     "securityOpt": ["seccomp=unconfined"],
@@ -33,7 +33,14 @@
                 "yzhang.markdown-all-in-one",
                 "ms-python.python",
                 "pflannery.vscode-versionlens",
-                "timonwong.shellcheck"
+                "timonwong.shellcheck",
+                "mitaki28.vscode-clang",
+                "llvm-vs-code-extensions.vscode-clangd",
+                "redhat.vscode-yaml",
+                "ritwickdey.LiveServer",
+                "donjayamanne.githistory",
+                "mhutchie.git-graph",
+                "github.vscode-github-actions"
             ]
         }
     },
