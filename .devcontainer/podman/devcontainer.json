@@ -1,7 +1,7 @@
 {
-    "name": "machi-koro-cpp-devcontainer",
+    "name": "machi-koro-cpp-devcontainer-podman",
     "build": {
-        "dockerfile": "Dockerfile"
+        "dockerfile": "../Dockerfile"
     },
     "capAdd": ["SYS_PTRACE"],
     "securityOpt": ["seccomp=unconfined"],
@@ -38,6 +38,7 @@
         }
     },
     "postCreateCommand": "npm install -g @devcontainers/cli",
+    "runArgs": ["--userns=keep-id"],
     "containerEnv": {
         "HOME": "/home/vscode"
     },
