@@ -24,7 +24,7 @@ void CreateGame::createGame(const drogon::HttpRequestPtr &req,
     }
     
     std::vector<std::string> player_names = 
-        controllers::utils::JsonValueToVectorOfString((*json)["playerNames"]);
+        controllers::utils::JsonValueToVectorOfString((*json)[controllers::utils::player_names]);
     
     CreateGamePresenter presenter;
     
