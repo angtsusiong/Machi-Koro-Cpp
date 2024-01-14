@@ -42,7 +42,7 @@ class Player;
 class Card {
 public:
     Card() = delete;
-    Card(const CardName& name, int price, const CardType& type);
+    Card(const int price, const CardName name, const CardType type);
     ~Card() = default;
 
     // TODO: Resolve this dependency relationship.
@@ -51,14 +51,11 @@ public:
         std::vector<Player*> players,
         Bank* bank) = 0;
 
-    CardName get_name() const { return name_; }
+    const int get_price() const { return price_; }
+    const CardName get_name() const { return name_; }
+    const CardType get_card_type() const { return card_type_; }
 
-    CardType get_card_type() const { return card_type_; }
-
-    int get_price() const { return price_; }
-
-private:
-    int price_ = 0;
-    CardName name_;
-    CardType card_type_;
+    const int price_;
+    const CardName name_;
+    const CardType card_type_;
 };

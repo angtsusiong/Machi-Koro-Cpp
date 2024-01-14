@@ -1,9 +1,8 @@
 #include "cafe.h"
 
-Cafe::Cafe() :
-    Building(CardName::CAFE, 2, CardType::RESTAURANT , {3}, IndustryType::RESTAURANT)
-{
-}
+Cafe::Cafe()
+    : Building(2, CardName::CAFE, CardType::RESTAURANT, {3},
+               IndustryType::RESTAURANT) {}
 
 void Cafe::OperateEffect(Player* owner,
     Player* dice_roller,

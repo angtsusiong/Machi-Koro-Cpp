@@ -3,12 +3,10 @@
 #include <map>
 #include <string>
 #include <vector>
-#include <deque>
 #include <memory>
 
-#include "./card/card.h"
-#include "./card/landmark.h"
-#include "./card/building.h"
+#include "card/building.h"
+#include "card/landmark.h"
 
 class ArchitectureMarket {
 public:
@@ -23,6 +21,7 @@ public:
 
     const std::map<CardName, std::vector<std::unique_ptr<Card>>>&
     get_buildings() const { return buildings_; }
+    template <typename T> void addCards(const int num);
 
 private:
     // key: Card name; Value : Cards.

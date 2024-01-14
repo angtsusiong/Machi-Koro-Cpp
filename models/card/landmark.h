@@ -5,7 +5,7 @@
 class Landmark: public Card {
 public:
     Landmark() = delete;
-    Landmark(const CardName& name, int price, const CardType& type);
+    Landmark(const int price, const CardName name, const CardType type);
     ~Landmark() = default;
 
     virtual void OperateEffect(Player* owner,

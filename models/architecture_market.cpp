@@ -24,34 +24,34 @@
 
 ArchitectureMarket::ArchitectureMarket()
 {
-    auto addBuildings = [&](const CardName& name, auto building, const int count) {
-        for (int i = 0; i < count; ++i) {
-            buildings_[name].push_back(std::make_unique<decltype(building)>());
-        }
-    };
-
     // Buildings.
-    addBuildings(CardName::WHEAT_FIELD, WheatField{}, 10);
-    addBuildings(CardName::RANCH, Ranch{}, 6);
-    addBuildings(CardName::BAKERY, Bakery{}, 10);
-    addBuildings(CardName::CAFE, Cafe{}, 6);
-    addBuildings(CardName::CONVENIENCE_STORE, ConvenientStore{}, 6);
-    addBuildings(CardName::FOREST, Forest{}, 6);
-    addBuildings(CardName::STADIUM, Stadium{}, 4);
-    addBuildings(CardName::TV_STATION, TvStation{}, 4);
-    addBuildings(CardName::BUSINESS_CENTER, BusinessCenter{}, 4);
-    addBuildings(CardName::CHEESE_FACTORY, CheeseFactory{}, 6);
-    addBuildings(CardName::FURNITURE_FACTORY, FurnitureFactory{}, 6);
-    addBuildings(CardName::MINE, Mine{}, 6);
-    addBuildings(CardName::FAMILY_RESTAURANT, FamilyRestaurant{}, 6);
-    addBuildings(CardName::APPLE_ORCHARD, AppleOrchard{}, 6);
-    addBuildings(CardName::FRUIT_AND_VEGETABLE_MARKET, FruitAndVegetableMarket{}, 6);
+    addCards<WheatField>(10);
+    addCards<Ranch>(6);
+    addCards<Bakery>(10);
+    addCards<Cafe>(6);
+    addCards<ConvenientStore>(6);
+    addCards<Forest>(6);
+    addCards<Stadium>(4);
+    addCards<TvStation>(4);
+    addCards<BusinessCenter>(4);
+    addCards<CheeseFactory>(6);
+    addCards<FurnitureFactory>(6);
+    addCards<Mine>(6);
+    addCards<FamilyRestaurant>(6);
+    addCards<AppleOrchard>(6);
+    addCards<FruitAndVegetableMarket>(6);
 
     // Landmarks.
-    addBuildings(CardName::AMUSEMENT_PARK, AmusementPark{}, 4);
-    addBuildings(CardName::RADIO_TOWER, RadioTower{}, 4);
-    addBuildings(CardName::SHOPPING_MALL, ShoppingMall{}, 4);
-    addBuildings(CardName::TRAIN_STATION, TrainStation{}, 4);
+    addCards<AmusementPark>(4);
+    addCards<RadioTower>(4);
+    addCards<ShoppingMall>(4);
+    addCards<TrainStation>(4);
+}
+
+template <typename T>
+void ArchitectureMarket::addCards(const int num) {
+    for (int i = 0; i < num; ++i)
+        buildings_[T::get_name()].emplace_back(std::make_unique<T>());
 }
 
 ArchitectureMarket::~ArchitectureMarket()

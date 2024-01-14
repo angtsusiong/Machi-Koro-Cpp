@@ -1,9 +1,8 @@
 #include "family_restaurant.h"
 
-FamilyRestaurant::FamilyRestaurant() :
-    Building(CardName::FAMILY_RESTAURANT, 3, CardType::RESTAURANT, {9, 10}, IndustryType::IMPORTANT_BUILDING)
-{
-}
+FamilyRestaurant::FamilyRestaurant()
+    : Building(3, CardName::FAMILY_RESTAURANT, CardType::RESTAURANT, {9, 10},
+               IndustryType::RESTAURANT) {}
 
 void FamilyRestaurant::OperateEffect(Player* owner,
     Player* dice_roller,

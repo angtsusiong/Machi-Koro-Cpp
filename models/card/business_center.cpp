@@ -1,9 +1,8 @@
 #include "business_center.h"
 
-BusinessCenter::BusinessCenter() :
-    Building(CardName::BUSINESS_CENTER, 8, CardType::MAJOR_ESTABLISHMENT, {6}, IndustryType::IMPORTANT_BUILDING)
-{
-}
+BusinessCenter::BusinessCenter()
+    : Building(8, CardName::BUSINESS_CENTER, CardType::MAJOR_ESTABLISHMENT, {6},
+               IndustryType::IMPORTANT_BUILDING) {}
 
 void BusinessCenter::OperateEffect(Player* owner,
     Player* dice_roller,

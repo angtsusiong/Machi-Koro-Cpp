@@ -5,8 +5,6 @@
 
 #include "card/card.h"
 
-class Card;
-
 class Hand {
 public:
     Hand();

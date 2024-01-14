@@ -1,9 +1,8 @@
 #include "wheat_field.h"
 
-WheatField::WheatField() :
-    Building(CardName::WHEAT_FIELD, 1, CardType::CROP, {1}, IndustryType::PRIMARY_INDUSTRY)
-{
-}
+WheatField::WheatField()
+    : Building(1, CardName::WHEAT_FIELD, CardType::CROP, {1},
+               IndustryType::PRIMARY_INDUSTRY) {}
 
 void WheatField::OperateEffect(Player* owner,
     Player* dice_roller,

@@ -1,6 +1,4 @@
 #include "landmark.h"
 
-Landmark::Landmark(const CardName& name, int price, const CardType& type) :
-    Card(name, price, type)
-{
-}
+Landmark::Landmark(const int price, const CardName name, const CardType type)
+    : Card(price, name, type) {}

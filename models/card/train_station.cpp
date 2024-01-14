@@ -1,9 +1,7 @@
 #include "train_station.h"
 
-TrainStation::TrainStation() :
-    Landmark(CardName::TRAIN_STATION, 4, CardType::MAJOR_ESTABLISHMENT)
-{
-}
+TrainStation::TrainStation()
+    : Landmark(4, CardName::TRAIN_STATION, CardType::MAJOR_ESTABLISHMENT) {}
 
 void TrainStation::OperateEffect(Player* owner,
     Player* dice_roller,

@@ -1,9 +1,8 @@
 #include "tv_station.h"
 
-TvStation::TvStation() :
-    Building(CardName::TV_STATION, 7, CardType::MAJOR_ESTABLISHMENT, {6}, IndustryType::PRIMARY_INDUSTRY)
-{
-}
+TvStation::TvStation()
+    : Building(7, CardName::TV_STATION, CardType::MAJOR_ESTABLISHMENT, {6},
+               IndustryType::IMPORTANT_BUILDING) {}
 
 void TvStation::OperateEffect(Player* owner,
     Player* dice_roller,

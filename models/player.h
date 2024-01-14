@@ -7,10 +7,6 @@
 
 #include "dice_impl.h"
 #include "hand.h"
-#include "card/building.h"
-
-class Card;
-class Hand;
 
 class Player {
 public:

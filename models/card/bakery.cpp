@@ -1,9 +1,8 @@
 #include "bakery.h"
 
-Bakery::Bakery() :
-    Building(CardName::BAKERY, 1, CardType::CROP, {2,3}, IndustryType::SECONDARY_INDUSTRY)
-{
-}
+Bakery::Bakery()
+    : Building(1, CardName::BAKERY, CardType::SHOP, {2, 3},
+               IndustryType::SECONDARY_INDUSTRY) {}
 
 void Bakery::OperateEffect(Player* owner,
     Player* dice_roller,
