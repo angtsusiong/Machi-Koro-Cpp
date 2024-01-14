@@ -7,8 +7,6 @@
 #include "../usecases/create_game_usecase.h"
 #include "../usecases/presenter.h"
 
-//using namespace drogon;
-
 class CreateGame : public drogon::HttpController<CreateGame>
 {
   public:
