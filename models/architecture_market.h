@@ -19,8 +19,6 @@ public:
     std::vector<std::unique_ptr<Card>> GetInitialBuildingsForOnePlayer();
     std::vector<std::unique_ptr<Card>> GetLandmarksForOnePlayer();
 
-    const std::map<CardName, std::vector<std::unique_ptr<Card>>>&
-    get_buildings() const { return buildings_; }
     template <typename T> void addCards(const int num);
 
 private:

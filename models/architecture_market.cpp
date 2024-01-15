@@ -65,12 +65,14 @@ std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOne
 {
     // 每個玩家一開始都各持有一張小麥田和麵包店。
     std::vector<std::unique_ptr<Card>> cards;
-    assert(buildings_[CardName::WHEAT_FIELD].size() > 0 && "There is no wheat field card in the market.");   
-    assert(buildings_[CardName::BAKERY].size() > 0 && "There is no bakery card in the market.");   
-    cards.push_back(std::move(buildings_[CardName::WHEAT_FIELD].back()));
-    cards.push_back(std::move(buildings_[CardName::BAKERY].back()));
-    buildings_[CardName::WHEAT_FIELD].pop_back();
-    buildings_[CardName::BAKERY].pop_back();
+    if (!buildings_[CardName::WHEAT_FIELD].empty() && buildings_[CardName::WHEAT_FIELD].back()) {
+        cards.emplace_back(std::move(buildings_[CardName::WHEAT_FIELD].back()));
+        buildings_[CardName::WHEAT_FIELD].pop_back();
+    }
+    if (!buildings_[CardName::BAKERY].empty() && buildings_[CardName::BAKERY].back()) {
+        cards.emplace_back(std::move(buildings_[CardName::BAKERY].back()));
+        buildings_[CardName::BAKERY].pop_back();
+    }
     return cards;
 }
 
@@ -78,21 +80,21 @@ std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetLandmarksForOnePlayer(
 {
     // 每個玩家一開始各分到一張主題樂園、一張廣播電台、一張購物中心，以及一張火車站。
     std::vector<std::unique_ptr<Card>> cards;
-    assert(buildings_[CardName::AMUSEMENT_PARK].size() > 0 && 
-        "There is no amusement park card in the market.");
-    assert(buildings_[CardName::SHOPPING_MALL].size() > 0 && 
-        "There is no shopping mall card in the market.");
-    assert(buildings_[CardName::TRAIN_STATION].size() > 0 && 
-        "There is no train station card in the market.");
-    assert(buildings_[CardName::RADIO_TOWER].size() > 0 && 
-        "There is no radio tower card in the market.");
-    cards.push_back(std::move(buildings_[CardName::AMUSEMENT_PARK].back()));
-    cards.push_back(std::move(buildings_[CardName::SHOPPING_MALL].back()));
-    cards.push_back(std::move(buildings_[CardName::TRAIN_STATION].back()));
-    cards.push_back(std::move(buildings_[CardName::RADIO_TOWER].back()));
-    buildings_[CardName::AMUSEMENT_PARK].pop_back();
-    buildings_[CardName::SHOPPING_MALL].pop_back();
-    buildings_[CardName::TRAIN_STATION].pop_back();
-    buildings_[CardName::RADIO_TOWER].pop_back();
+    if (!buildings_[CardName::AMUSEMENT_PARK].empty() && buildings_[CardName::AMUSEMENT_PARK].back()) {
+        cards.emplace_back(std::move(buildings_[CardName::AMUSEMENT_PARK].back()));
+        buildings_[CardName::AMUSEMENT_PARK].pop_back();
+    }
+    if (!buildings_[CardName::RADIO_TOWER].empty() && buildings_[CardName::RADIO_TOWER].back()) {
+        cards.emplace_back(std::move(buildings_[CardName::RADIO_TOWER].back()));
+        buildings_[CardName::RADIO_TOWER].pop_back();
+    }
+    if (!buildings_[CardName::SHOPPING_MALL].empty() && buildings_[CardName::SHOPPING_MALL].back()) {
+        cards.emplace_back(std::move(buildings_[CardName::SHOPPING_MALL].back()));
+        buildings_[CardName::SHOPPING_MALL].pop_back();
+    }
+    if (!buildings_[CardName::TRAIN_STATION].empty() && buildings_[CardName::TRAIN_STATION].back()) {
+        cards.emplace_back(std::move(buildings_[CardName::TRAIN_STATION].back()));
+        buildings_[CardName::TRAIN_STATION].pop_back();
+    }
     return cards;
 }

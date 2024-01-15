@@ -1,29 +1,40 @@
 #include "hand.h"
+#include <algorithm>
 
-Hand::Hand()
-{
+Hand::Hand() {}
+
+Hand::~Hand() {
+  for (auto &c : buildings_)
+    c = nullptr;
+  buildings_.clear();
+  for (auto &l : landmarks_)
+    l = nullptr;
+  landmarks_.clear();
 }
 
-Hand::~Hand()
-{
-    for (auto& c : buildings_) c = nullptr;
-    buildings_.clear();
-    for (auto& l : landmarks_) l = nullptr;
-    landmarks_.clear();
+bool Hand::IsLandmarkInHand(const CardName card_name) const {
+  auto it = std::find_if(
+      landmarks_.begin(), landmarks_.end(),
+      [card_name](std::shared_ptr<Card> card) {
+        return card->get_name() == card_name &&
+               std::dynamic_pointer_cast<Landmark>(card)->IsActivate();
+      });
+  return it != landmarks_.end();
 }
 
-std::vector<std::shared_ptr<Card>> Hand::get_buildings() const
-{
-    // std::vector<Card*> res;
-    // for (const auto& card : buildings_)
-    //     res.push_back(card.get());
-    return buildings_;
+bool Hand::IsBuildingInHand(const CardName card_name) const {
+  auto it = std::find_if(
+      buildings_.begin(), buildings_.end(),
+      [card_name](std::shared_ptr<Card> building) {
+        return building->get_name() == card_name;
+      });
+  return it != buildings_.end();
 }
 
-std::vector<std::shared_ptr<Card>> Hand::get_landmarks() const
-{
-    // std::vector<Card*> res;
-    // for (const auto& card: landmarks_)
-    //     res.push_back(card.get());
-    return landmarks_;
+int Hand::NumOfBuildingInHand(const CardName card_name) const {
+  return std::count_if(
+      buildings_.begin(), buildings_.end(),
+      [card_name](std::shared_ptr<Card> building) {
+        return building->get_name() == card_name;
+      });
 }

@@ -24,13 +24,11 @@ public:
     void GameStart();
 
     std::unique_ptr<DomainEvent> 
-    RollDice(const std::string& player_id, int dice_count);
+    RollDice(std::shared_ptr<Player> player, int dice_count);
 
     std::string get_game_id() const { return game_id_; }
 
-    const Bank* get_bank() const { return bank_.get(); }
-
-    const ArchitectureMarket* get_market() const { return market_.get(); }
+    const int get_bank_coin() const { return bank_->get_coin(); }
 
     // TODO(smart pointer): implement this function.
     std::vector<std::shared_ptr<Player>> get_players() const;

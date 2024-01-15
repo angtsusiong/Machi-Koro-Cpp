@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "card/card.h"
+#include "card/landmark.h"
 
 class Hand {
 public:
@@ -16,9 +17,12 @@ public:
     void AddLandmark(std::unique_ptr<Card> card) 
     { landmarks_.push_back(std::move(card)); }
 
-    std::vector<std::shared_ptr<Card>> get_buildings() const;
+    std::vector<std::shared_ptr<Card>> get_buildings() const { return buildings_; }
+    std::vector<std::shared_ptr<Card>> get_landmarks() const { return landmarks_; }
 
-    std::vector<std::shared_ptr<Card>> get_landmarks() const;
+    bool IsLandmarkInHand(const CardName card_name) const;
+    bool IsBuildingInHand(const CardName card_name) const;
+    int NumOfBuildingInHand(const CardName card_name) const;
 
 private:
     friend class Player;

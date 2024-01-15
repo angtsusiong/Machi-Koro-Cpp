@@ -5,7 +5,6 @@
 #include <memory>
 #include <utility>
 
-#include "dice_impl.h"
 #include "hand.h"
 
 class Player {
@@ -38,9 +37,13 @@ public:
 
     std::shared_ptr<Hand> get_hand() const { return hand_; }
 
+    bool isLandmarkActivated(const CardName card_name) const;
+    int numOfRestaurantInHand(const CardName card_name) const;
+    int numOfSecondaryInHand(const CardName card_name) const;
+    int numOfPrimaryInHand(const CardName card_name) const;
+
 private:
     int coin_ = 0;
-    DiceImpl dice_;
     std::string name_;
     std::shared_ptr<Hand> hand_;
 };

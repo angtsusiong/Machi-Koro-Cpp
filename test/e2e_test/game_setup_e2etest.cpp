@@ -89,8 +89,7 @@ TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
     auto players = game->get_players();
     EXPECT_EQ(players.size(), 4);
 
-    auto bank = game->get_bank();
-    EXPECT_EQ(bank->get_coin(), (282 - 4 * 3));
+    EXPECT_EQ(game->get_bank_coin(), (282 - 4 * 3));
 
     for(const auto& player : players) {
         EXPECT_EQ(player->get_coin(), 3);

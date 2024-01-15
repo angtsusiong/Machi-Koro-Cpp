@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include <algorithm>
+#include <random>
 
 #include "card/landmark.h"
 
@@ -19,30 +20,14 @@ Player::~Player()
 {
 }
 
-std::pair<int, int> Player::RollDice(int dice_count)
-{
-    auto it = std::find_if(
-        hand_->get_landmarks().begin(), 
-        hand_->get_landmarks().end(),
-        [](std::shared_ptr<Card> landmark) {
-            return landmark->get_name() == CardName::TRAIN_STATION &&
-                std::dynamic_pointer_cast<Landmark>(landmark)->IsActivate();
-        }
-    );
-
+std::pair<int, int> Player::RollDice(int dice_count) {
     // If have TrainStation and want to roll 2 dice,
     // then let it roll 2 dice.
-    if (it != hand_->get_landmarks().end() && dice_count == 2)
-        dice_count = 2;
-    else
-        dice_count = 1;
-
-    int pt1 = 0, pt2 = 0;
-    pt1 = dice_.GeneratePoint();
-    if (dice_count == 2)
-        pt2 = dice_.GeneratePoint();
-
-    return std::make_pair(pt1, pt2); 
+    std::mt19937 gen(std::random_device{}());
+    std::uniform_int_distribution<int> dist(1, 6);
+    if (hand_->IsLandmarkInHand(CardName::TRAIN_STATION) && dice_count == 2)
+        return {dist(gen), dist(gen)};
+    return {dist(gen), 0};
 }
 
 void Player::PayCoin(int coin)
@@ -71,4 +56,24 @@ void Player::GainInitialBuildings(std::vector<std::unique_ptr<Card>>&& cards)
 {
     for (auto& card : cards)
         hand_->AddBuilding(std::move(card));
+}
+
+bool Player::isLandmarkActivated(const CardName card_name) const
+{
+    return hand_->IsLandmarkInHand(card_name);
+}
+
+int Player::numOfRestaurantInHand(const CardName card_name) const
+{
+    return hand_->NumOfBuildingInHand(card_name);
+}
+
+int Player::numOfSecondaryInHand(const CardName card_name) const
+{
+    return hand_->NumOfBuildingInHand(card_name);
+}
+
+int Player::numOfPrimaryInHand(const CardName card_name) const
+{
+    return hand_->NumOfBuildingInHand(card_name);
 }
