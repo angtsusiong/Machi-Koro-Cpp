@@ -41,7 +41,7 @@ void MachiKoroGame::GameStart()
     std::cout << "Game Start !!" << std::endl;
 }
 
-std::vector<std::shared_ptr<Player>> MachiKoroGame::get_players() const
+std::deque<std::shared_ptr<Player>> MachiKoroGame::get_players() const
 {
     return players_;
 }
@@ -62,23 +62,27 @@ MachiKoroGame::RollDice(std::shared_ptr<Player> player, int dice_count)
     for (const auto card_name : card_names) {
         switch (card_name) {
             case CardName::CAFE: {
-                for (auto& other : players_) {
-                    if (other == player) continue;
-                    for (int i = other->numOfRestaurantInHand(CardName::CAFE); i > 0; --i) {
+                for (auto rit = players_.rbegin(); rit != players_.rend(); ++rit) {
+                    if (*rit == player) continue;
+                    for (int i = (*rit)->numOfRestaurantInHand(CardName::CAFE); i > 0; --i) {
                         if (player->get_coin())
-                            player->PayCoin2AnotherPlayer(1, other.get());
+                            player->PayCoin2AnotherPlayer(1, *rit);
+                        if ((*rit)->isLandmarkActivated(CardName::SHOPPING_MALL))
+                            bank_->PayCoin2Player(1, *rit);
                     }
                 }
                 break;
             }
             case CardName::FAMILY_RESTAURANT: {
-                for (auto& other : players_) {
-                    if (other == player) continue;
-                    for (int i = other->numOfRestaurantInHand(CardName::FAMILY_RESTAURANT); i > 0; --i) {
+                for (auto rit = players_.rbegin(); rit != players_.rend(); ++rit) {
+                    if (*rit == player) continue;
+                    for (int i = (*rit)->numOfRestaurantInHand(CardName::FAMILY_RESTAURANT); i > 0; --i) {
                         if (player->get_coin() >= 2)
-                            player->PayCoin2AnotherPlayer(2, other.get());
+                            player->PayCoin2AnotherPlayer(2, *rit);
                         else if (player->get_coin() == 1)
-                            player->PayCoin2AnotherPlayer(1, other.get());
+                            player->PayCoin2AnotherPlayer(1, *rit);
+                        if ((*rit)->isLandmarkActivated(CardName::SHOPPING_MALL))
+                            bank_->PayCoin2Player(1, *rit);
                     }
                 }
                 break;
@@ -94,10 +98,14 @@ MachiKoroGame::RollDice(std::shared_ptr<Player> player, int dice_count)
             switch (card_name) {
                 case CardName::BAKERY: {
                     bank_->PayCoin2Player(1 * num_of_secondary, player);
+                    if (player->isLandmarkActivated(CardName::SHOPPING_MALL))
+                        bank_->PayCoin2Player(1 * num_of_secondary, player);
                     break;
                 }
                 case CardName::CONVENIENCE_STORE: {
                     bank_->PayCoin2Player(3 * num_of_secondary, player);
+                    if (player->isLandmarkActivated(CardName::SHOPPING_MALL))
+                        bank_->PayCoin2Player(1 * num_of_secondary, player);
                     break;
                 }
                 case CardName::CHEESE_FACTORY: {
@@ -167,6 +175,35 @@ MachiKoroGame::RollDice(std::shared_ptr<Player> player, int dice_count)
                     if (num_of_primary)
                         bank_->PayCoin2Player(3 * num_of_primary, p);
                 }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    for (const auto card_name : card_names) {
+        switch (card_name) {
+            case CardName::STADIUM: {
+                if (player->isImportantInHand(CardName::STADIUM)) {
+                    for (auto& other : players_) {
+                        if (other == player) continue;
+                        if (other->get_coin() >= 2) {
+                            other->PayCoin2AnotherPlayer(2, player);
+                        } else if (other->get_coin() == 1) {
+                            other->PayCoin2AnotherPlayer(1, player);
+                        }
+                    }
+                }
+
+                break;
+            }
+            case CardName::TV_STATION: {
+                // TODO: implement TV_STATION another player
+                break;
+            }
+            case CardName::BUSINESS_CENTER: {
+                // TODO: implement BUSINESS_CENTER another player
                 break;
             }
             default:

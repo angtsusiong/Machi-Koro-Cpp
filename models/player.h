@@ -24,7 +24,7 @@ public:
 
     void GainCoin(int coin);
 
-    void PayCoin2AnotherPlayer(int coin, Player* other);
+    void PayCoin2AnotherPlayer(int coin, std::shared_ptr<Player> other);
 
     void GainLandmarks(std::vector<std::unique_ptr<Card>>&& cards);
 
@@ -42,6 +42,7 @@ public:
     int numOfRestaurantInHand(const CardName card_name) const;
     int numOfSecondaryInHand(const CardName card_name) const;
     int numOfPrimaryInHand(const CardName card_name) const;
+    bool isImportantInHand(const CardName card_name) const;
 
 private:
     int coin_ = 0;

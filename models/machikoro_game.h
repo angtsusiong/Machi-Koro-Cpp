@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <deque>
 
 #include "bank.h"
 #include "player.h"
@@ -31,11 +32,11 @@ public:
     const int get_bank_coin() const { return bank_->get_coin(); }
 
     // TODO(smart pointer): implement this function.
-    std::vector<std::shared_ptr<Player>> get_players() const;
+    std::deque<std::shared_ptr<Player>> get_players() const;
 
 private:
     const std::string game_id_;
     std::unique_ptr<Bank> bank_ = std::make_unique<Bank>();
-    std::vector<std::shared_ptr<Player>> players_;
+    std::deque<std::shared_ptr<Player>> players_;
     std::unique_ptr<ArchitectureMarket> market_ = std::make_unique<ArchitectureMarket>();
 };

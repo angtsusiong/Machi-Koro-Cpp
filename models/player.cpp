@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <random>
 
+#include "card/card.h"
 #include "card/landmark.h"
 
 Player::Player()
@@ -40,7 +41,7 @@ void Player::GainCoin(int coin)
     coin_ += coin;
 }
 
-void Player::PayCoin2AnotherPlayer(int coin, Player* other)
+void Player::PayCoin2AnotherPlayer(int coin, std::shared_ptr<Player> other)
 {
     this->PayCoin(coin);
     other->GainCoin(coin);
@@ -75,10 +76,21 @@ int Player::numOfRestaurantInHand(const CardName card_name) const
 
 int Player::numOfSecondaryInHand(const CardName card_name) const
 {
-    return hand_->NumOfBuildingInHand(card_name);
+    if (card_name == CardName::BAKERY || card_name == CardName::CONVENIENCE_STORE
+        || card_name == CardName::CHEESE_FACTORY || card_name == CardName::FURNITURE_FACTORY
+        || card_name == CardName::FRUIT_AND_VEGETABLE_MARKET)
+        return hand_->NumOfBuildingInHand(card_name);
+    return 0;
 }
 
 int Player::numOfPrimaryInHand(const CardName card_name) const
 {
     return hand_->NumOfBuildingInHand(card_name);
+}
+
+bool Player::isImportantInHand(const CardName card_name) const {
+    if (card_name == CardName::STADIUM || card_name == CardName::TV_STATION ||
+        card_name == CardName::BUSINESS_CENTER)
+        return hand_->IsBuildingInHand(card_name);
+    return false;
 }
