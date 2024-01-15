@@ -108,11 +108,13 @@ TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
             EXPECT_NE(std::find(card_names.begin(), card_names.end(), card->get_name()), card_names.end());
         }
 
+        player->activateLandmark(CardName::AMUSEMENT_PARK);
         EXPECT_EQ(hand->get_landmarks().size(), 4);
-        for (const auto& landmark: hand->get_landmarks()) {
+        for (auto& landmark: hand->get_landmarks()) {
             EXPECT_NE(std::find(card_names.begin(), card_names.end(), landmark->get_name()), card_names.end());
-            EXPECT_FALSE(std::dynamic_pointer_cast<Landmark>(landmark)->IsActivate());
+            EXPECT_EQ(player->isLandmarkActivated(landmark->get_name()), landmark->get_name() == CardName::AMUSEMENT_PARK);
         }
+        EXPECT_TRUE(player->isLandmarkActivated(CardName::AMUSEMENT_PARK));
     }
 
 }

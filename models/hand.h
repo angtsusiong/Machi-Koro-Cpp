@@ -23,6 +23,7 @@ public:
     bool IsLandmarkInHand(const CardName card_name) const;
     bool IsBuildingInHand(const CardName card_name) const;
     int NumOfBuildingInHand(const CardName card_name) const;
+    void ActivateLandmark(const CardName card_name);
 
 private:
     friend class Player;

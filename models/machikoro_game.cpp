@@ -128,13 +128,6 @@ MachiKoroGame::RollDice(std::shared_ptr<Player> player, int dice_count)
     }
 
     for (const auto card_name : card_names) {
-        for (auto &p : players_) {
-            int num_of_primary = p->numOfPrimaryInHand(card_name);
-        }
-        int num_of_primary = player->numOfPrimaryInHand(card_name);
-        if (num_of_primary) {
-        }
-
         switch (card_name) {
             case CardName::WHEAT_FIELD: {
                 for (auto& p : players_) {

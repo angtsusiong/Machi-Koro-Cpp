@@ -63,6 +63,11 @@ bool Player::isLandmarkActivated(const CardName card_name) const
     return hand_->IsLandmarkInHand(card_name);
 }
 
+void Player::activateLandmark(const CardName card_name)
+{
+    hand_->ActivateLandmark(card_name);
+}
+
 int Player::numOfRestaurantInHand(const CardName card_name) const
 {
     return hand_->NumOfBuildingInHand(card_name);

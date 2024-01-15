@@ -38,6 +38,7 @@ public:
     std::shared_ptr<Hand> get_hand() const { return hand_; }
 
     bool isLandmarkActivated(const CardName card_name) const;
+    void activateLandmark(const CardName card_name);
     int numOfRestaurantInHand(const CardName card_name) const;
     int numOfSecondaryInHand(const CardName card_name) const;
     int numOfPrimaryInHand(const CardName card_name) const;

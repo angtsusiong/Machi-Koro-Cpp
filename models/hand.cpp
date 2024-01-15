@@ -38,3 +38,13 @@ int Hand::NumOfBuildingInHand(const CardName card_name) const {
         return building->get_name() == card_name;
       });
 }
+
+void Hand::ActivateLandmark(const CardName card_name) {
+  auto it = std::find_if(
+      landmarks_.begin(), landmarks_.end(),
+      [card_name](std::shared_ptr<Card> card) {
+        return card->get_name() == card_name;
+      });
+  if (it != landmarks_.end())
+    std::dynamic_pointer_cast<Landmark>(*it)->Activate();
+}
