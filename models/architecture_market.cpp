@@ -24,6 +24,9 @@
 
 ArchitectureMarket::ArchitectureMarket()
 {
+    m_cards = {6, 10, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 10,
+        4, 4, 4, 4};
+
     // Buildings.
     addCards<WheatField>(10);
     addCards<Ranch>(6);
@@ -74,6 +77,12 @@ std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOne
         buildings_[CardName::BAKERY].pop_back();
     }
     return cards;
+}
+
+std::vector<CardName> ArchitectureMarket::acquireInitBuildings() {
+    for (size_t card : {static_cast<size_t>(CardName::WHEAT_FIELD), static_cast<size_t>(CardName::BAKERY)})
+        --m_cards[card];
+    return {CardName::WHEAT_FIELD, CardName::BAKERY};
 }
 
 std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetLandmarksForOnePlayer()

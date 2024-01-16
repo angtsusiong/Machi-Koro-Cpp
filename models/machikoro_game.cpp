@@ -21,6 +21,8 @@ MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names) :
     for (auto& player : players_) {
         player->GainInitialBuildings(std::move(market_->GetInitialBuildingsForOnePlayer()));
         player->GainLandmarks(std::move(market_->GetLandmarksForOnePlayer()));
+
+        player->acquireInitBuildings(market_->acquireInitBuildings());
     }
 
     // Choose one player as starter

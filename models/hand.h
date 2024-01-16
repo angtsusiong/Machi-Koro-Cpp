@@ -1,7 +1,9 @@
 #pragma once
 
+#include <array>
 #include <vector>
 #include <memory>
+#include <unordered_set>
 
 #include "card/card.h"
 #include "card/landmark.h"
@@ -25,8 +27,14 @@ public:
     int NumOfBuildingInHand(const CardName card_name) const;
     void ActivateLandmark(const CardName card_name);
 
+    void add_buildings(const std::vector<CardName>& cards) {
+        for (auto card : cards) ++m_buildings[static_cast<size_t>(card)];
+    }
+    std::array<int, 15> get_buildings_count() const { return m_buildings; }
 private:
     friend class Player;
+    std::array<int, 15> m_buildings{};
+    std::unordered_set<CardName> m_landmarks{};
     std::vector<std::shared_ptr<Card>> buildings_;
     std::vector<std::shared_ptr<Card>> landmarks_;
 };

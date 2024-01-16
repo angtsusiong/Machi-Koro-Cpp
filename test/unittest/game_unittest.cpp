@@ -28,6 +28,7 @@ TEST_F(GameTest, GameInit) {
         EXPECT_EQ(player->get_hand()->get_buildings().size(), 2);
         EXPECT_EQ(player->get_hand()->get_landmarks().size(), 4);
         EXPECT_EQ(player->get_coin(), 3);
+        EXPECT_EQ(player->get_hand()->get_buildings_count()[static_cast<size_t>(CardName::WHEAT_FIELD)], 1);
     }
     // 19 types of cards
 }

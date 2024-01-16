@@ -44,6 +44,9 @@ public:
     int numOfPrimaryInHand(const CardName card_name) const;
     bool isImportantInHand(const CardName card_name) const;
 
+    void acquireInitBuildings(const std::vector<CardName>& cards) {
+        hand_->add_buildings(cards);
+    }
 private:
     int coin_ = 0;
     std::string name_;
