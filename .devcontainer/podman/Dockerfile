@@ -39,6 +39,7 @@ RUN echo "==== Installing dependency ====" && \
         libpqxx-dev \
         libmariadb-dev \
         libsqlite3-dev \
+        libspdlog-dev \
         libhiredis-dev \
         libyaml-cpp-dev \
         libbrotli-dev \
