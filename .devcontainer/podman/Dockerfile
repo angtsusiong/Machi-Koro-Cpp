@@ -5,6 +5,8 @@ ENV LANG="en_US.UTF-8" \
     TZ="Asia/Taipei" \
     TERM="xterm-256color"
 
+ARG DROGON_VERSION
+
 RUN set -xe && \
     echo "==== Setting locale ====" && \
     update-locale LANG=${LANG} && \
@@ -58,10 +60,16 @@ RUN echo "==== update alternatives clang ====" && \
     update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-16 100 && \
     update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-16 100
 
+COPY 010-drogon-build-cpp20-spdlog-doc.patch /tmp/010-drogon-build-cpp20-spdlog-doc.patch
+
 RUN echo "==== Installing drogon from source ====" && \
+    DROGON_VERSION=$(curl -s https://api.github.com/repos/drogonframework/drogon/releases/latest | jq -r '.tag_name') && \
     git clone "https://github.com/drogonframework/drogon" "/tmp/drogon" && \
     cd "/tmp/drogon" && \
+    echo "==== Installing Drogon version: ${DROGON_VERSION} ====" && \
+    git checkout ${DROGON_VERSION} && \
+    patch -d "/tmp/drogon" -Np1 -i "/tmp/010-drogon-build-cpp20-spdlog-doc.patch" && \
     ./build.sh && \
-    rm -rf "/tmp/drogon"
+    rm -rf "/tmp/drogon" "/tmp/010-drogon-build-cpp20-spdlog-doc.patch"
 
 ARG USERNAME=vscode
