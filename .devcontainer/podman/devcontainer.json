@@ -40,7 +40,9 @@
                 "ritwickdey.LiveServer",
                 "donjayamanne.githistory",
                 "mhutchie.git-graph",
-                "github.vscode-github-actions"
+                "github.vscode-github-actions",
+                "eamodio.gitlens",
+                "jock.svg"
             ]
         }
     },
