@@ -1,0 +1,17 @@
+--- a/build.sh	2024-02-28 19:23:36.163691121 +0800
++++ b/build.sh	2024-02-28 23:24:23.669448446 +0800
+@@ -28,11 +28,11 @@
+ 
+     echo "Start building drogon ..."
+     if [ $1 -eq 1 ]; then
+-        cmake .. -DBUILD_TESTING=YES $cmake_gen
++        cmake .. -DBUILD_TESTING=YES -DCMAKE_REQUIRED_FLAGS="-std=c++20" -DCMAKE_CXX_STANDARD=20 -DUSE_SPDLOG=ON $cmake_gen
+     elif [ $1 -eq 2 ]; then
+-        cmake .. -DBUILD_TESTING=YES -DBUILD_SHARED_LIBS=ON -DCMAKE_CXX_VISIBILITY_PRESET=hidden -DCMAKE_VISIBILITY_INLINES_HIDDEN=1 $cmake_gen
++        cmake .. -DBUILD_TESTING=YES -DCMAKE_REQUIRED_FLAGS="-std=c++20" -DCMAKE_CXX_STANDARD=20 -DUSE_SPDLOG=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_CXX_VISIBILITY_PRESET=hidden -DCMAKE_VISIBILITY_INLINES_HIDDEN=1 $cmake_gen
+     else
+-        cmake .. -DCMAKE_BUILD_TYPE=release $cmake_gen
++        cmake .. -DCMAKE_BUILD_TYPE=release -DCMAKE_REQUIRED_FLAGS="-std=c++20" -DCMAKE_CXX_STANDARD=20 -DUSE_SPDLOG=ON $cmake_gen
+     fi
+ 
+     #If errors then exit

@@ -60,7 +60,7 @@ RUN echo "==== update alternatives clang ====" && \
     update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-16 100 && \
     update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-16 100
 
-COPY 010-drogon-build-debug-cpp20-spdlog-doc.patch /tmp/010-drogon-build-debug-cpp20-spdlog-doc.patch
+COPY 010-drogon-build-cpp20-spdlog.patch /tmp/010-drogon-build-cpp20-spdlog.patch
 
 RUN echo "==== Installing drogon from source ====" && \
     DROGON_VERSION=$(curl -s https://api.github.com/repos/drogonframework/drogon/releases/latest | jq -r '.tag_name') && \
@@ -68,8 +68,8 @@ RUN echo "==== Installing drogon from source ====" && \
     cd "/tmp/drogon" && \
     echo "==== Installing Drogon version: ${DROGON_VERSION} ====" && \
     git checkout ${DROGON_VERSION} && \
-    patch -d "/tmp/drogon" -Np1 -i "/tmp/010-drogon-build-debug-cpp20-spdlog-doc.patch" && \
+    patch -d "/tmp/drogon" -Np1 -i "/tmp/010-drogon-build-cpp20-spdlog.patch" && \
     ./build.sh && \
-    rm -rf "/tmp/drogon" "/tmp/010-drogon-build-debug-cpp20-spdlog-doc.patch"
+    rm -rf "/tmp/drogon" "/tmp/010-drogon-build-cpp20-spdlog.patch"
 
 ARG USERNAME=vscode
