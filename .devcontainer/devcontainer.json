@@ -42,8 +42,32 @@
                 "mhutchie.git-graph",
                 "github.vscode-github-actions",
                 "eamodio.gitlens",
-                "jock.svg"
-            ]
+                "jock.svg",
+                "tintinweb.graphviz-interactive-preview",
+                "redhat.vscode-xml",
+                "codezombiech.gitignore"
+            ],
+            "settings": {
+                "[cpp]": {
+                    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+                },
+                "[jsonc]": {
+                    "editor.defaultFormatter": "vscode.json-language-features"
+                },
+                "cmake.generator": "Ninja",
+                "cmake.configureOnOpen": false,
+                "cmake.ctest.allowParallelJobs": false,
+                "clang.completion.completeMacros": true,
+                "clang.completion.enable": true,
+                "clang.diagnostic.enable": true,
+                "clangd.checkUpdates": false,
+                "clangd.detectExtensionConflicts": false,
+                "C_Cpp.formatting": "clangFormat",
+                "C_Cpp.vcpkg.enabled": false,
+                "C_Cpp.codeAnalysis.clangTidy.useBuildPath": true,
+                "git.autofetch": true,
+                "redhat.telemetry.enabled": false
+            }
         }
     },
     "postCreateCommand": "npm install -g @devcontainers/cli",
