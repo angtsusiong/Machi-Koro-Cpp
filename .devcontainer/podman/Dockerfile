@@ -27,6 +27,7 @@ RUN echo "==== Installing dependency ====" && \
         clang-tidy-16 \
         clangd-16 \
         clang-tools-16 \
+        ninja-build \
         doxygen \
         graphviz \
         xdot \

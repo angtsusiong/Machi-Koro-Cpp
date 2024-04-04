@@ -45,7 +45,10 @@
                 "jock.svg",
                 "tintinweb.graphviz-interactive-preview",
                 "redhat.vscode-xml",
-                "codezombiech.gitignore"
+                "codezombiech.gitignore",
+                "mcu-debug.debug-tracker-vscode",
+                "ms-vscode.hexeditor",
+                "mcu-debug.memory-view"
             ],
             "settings": {
                 "[cpp]": {
