@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <thread>
 
 #include "utils/util_base.h"
 #include "loggers/logger_base.h"
@@ -23,6 +24,8 @@ public:
 
     // Init the game.
     std::unique_ptr<Event> initGame();
+
+    std::unique_ptr<Event> incrementCurrentPlayer();
 
     std::string game_id() const { return game_id_; }
 
