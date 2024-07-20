@@ -11,13 +11,9 @@
             "installOhMyZsh": "false",
             "installOhMyZshConfig": "false",
             "username": "vscode",
-            "userUid": "1000",
-            "userGid": "1000",
             "upgradePackages": "true"
         },
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            "dockerDashComposeVersion": "v2"
-        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/devcontainers/features/node:1": {}
     },
     "customizations": {
@@ -29,7 +25,6 @@
                 "ms-vscode.cmake-tools",
                 "streetsidesoftware.code-spell-checker",
                 "ms-azuretools.vscode-docker",
-                "ms-vscode.makefile-tools",
                 "yzhang.markdown-all-in-one",
                 "ms-python.python",
                 "pflannery.vscode-versionlens",
@@ -45,10 +40,7 @@
                 "jock.svg",
                 "tintinweb.graphviz-interactive-preview",
                 "redhat.vscode-xml",
-                "codezombiech.gitignore",
-                "mcu-debug.debug-tracker-vscode",
-                "ms-vscode.hexeditor",
-                "mcu-debug.memory-view"
+                "codezombiech.gitignore"
             ],
             "settings": {
                 "[cpp]": {
