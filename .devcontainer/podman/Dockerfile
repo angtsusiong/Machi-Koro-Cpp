@@ -1,4 +1,4 @@
-ARG VARIANT="debian-12"
+ARG VARIANT="dev-ubuntu-24.04"
 FROM mcr.microsoft.com/devcontainers/cpp:${VARIANT}
 
 ENV LANG="en_US.UTF-8" \
@@ -20,21 +20,21 @@ RUN echo "==== Installing dependency ====" && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y \
         libssl-dev \
-        lld-16 \
-        lldb-16 \
-        clang-16 \
-        clang-format-16 \
-        clang-tidy-16 \
-        clangd-16 \
-        clang-tools-16 \
+        lld-18 \
+        lldb-18 \
+        clang-18 \
+        clang-format-18 \
+        clang-tidy-18 \
+        clangd-18 \
+        clang-tools-18 \
         ninja-build \
         doxygen \
         graphviz \
         xdot \
         dia \
-        llvm-16-dev \
-        libc++-16-dev \
-        libc++abi-16-dev \
+        llvm-18-dev \
+        libc++-18-dev \
+        libc++abi-18-dev \
         libjsoncpp-dev \
         uuid-dev \
         zlib1g-dev \
@@ -48,18 +48,17 @@ RUN echo "==== Installing dependency ====" && \
         libbrotli-dev \
         libgtest-dev \
         libgmock-dev && \
-    apt-get autoremove -y clang-14 && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN echo "==== update alternatives clang ====" && \
-    update-alternatives --install /usr/bin/clang clang /usr/bin/clang-16 100 && \
-    update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-16 100 && \
-    update-alternatives --install /usr/bin/lld lld /usr/bin/lld-16 100 && \
-    update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-16 100 && \
-    update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-16 100 && \
-    update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-16 100 && \
-    update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-16 100
+    update-alternatives --install /usr/bin/clang clang /usr/bin/clang-18 100 && \
+    update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-18 100 && \
+    update-alternatives --install /usr/bin/lld lld /usr/bin/lld-18 100 && \
+    update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-18 100 && \
+    update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-18 100 && \
+    update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-18 100 && \
+    update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-18 100
 
 COPY 010-drogon-build-cpp20-spdlog.patch /tmp/010-drogon-build-cpp20-spdlog.patch
 
